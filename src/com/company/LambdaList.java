@@ -56,12 +56,20 @@ public class LambdaList<T> {
     }
 
     LambdaList<T> filter(IBoolean<T> bool) {
-        LambdaList<T> lambdaList = new LambdaList<>();
+        LambdaList<T> lam = new LambdaList<>();
         for (T t : arrayList) {
             if (bool.bool(t)) {
-                lambdaList.add(t);
+                lam.add(t);
             }
         }
-        return lambdaList;
+        return lam;
+    }
+
+    <N> LambdaList<N> map(IModify<T, N> modify) {
+        LambdaList<N> lam = new LambdaList<>();
+        for (T t : arrayList) {
+            lam.add(modify.modify(t));
+        }
+        return lam;
     }
 }
